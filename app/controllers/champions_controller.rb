@@ -5,12 +5,12 @@ class ChampionsController < ApplicationController
   def index
     @champions = Champion.all
 
-    render json: @champions
+    render xml: @champions.as_json
   end
 
   # GET /champions/1
   def show
-    render json: @champion
+    render xml: @champion.as_json
   end
 
   # POST /champions
@@ -18,18 +18,18 @@ class ChampionsController < ApplicationController
     @champion = Champion.new(champion_params)
 
     if @champion.save
-      render json: @champion, status: :created, location: @champion
+      render xml: @champion.as_json, status: :created, location: @champion.as_json
     else
-      render json: @champion.errors, status: :unprocessable_entity
+      render xml: @champion.errors, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /champions/1
   def update
     if @champion.update(champion_params)
-      render json: @champion
+      render xml: @champion.as_json
     else
-      render json: @champion.errors, status: :unprocessable_entity
+      render xml: @champion.errors, status: :unprocessable_entity
     end
   end
 
